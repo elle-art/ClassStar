@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Behavior Tracker</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="page-title">Student Behavior Tracker</h1>
+
+    <section id="teacher-name-setup">
+        <h2>Welcome!</h2>
+        <form id="teacher-name-form">
+            <label for="teacher-name">What do your students call you?</label>
+            <input type="text" id="teacher-name" name="teacher-name" required>
+            <button type="submit">Enter</button>
+        </form>
+    </section>
+
+    <section id="student-roster-setup" class="hidden">
+        <h2>Create Student Roster</h2>
+        <form id="add-student-form">
+            <label for="first-name">First Name:</label>
+            <input type="text" id="first-name" name="first-name" required>
+            <label for="last-name">Last Name:</label>
+            <input type="text" id="last-name" name="last-name" required>
+            <label for="student-status">Status:</label>
+            <input type="text" id="student-status" name="student-status">
+            <button type="submit">Add Student</button>
+        </form>
+        <button id="next-to-behaviors">Next Section</button>
+    </section>
+
+    <section id="add-behavior-section" class="hidden">
+        <h2>Create Behavior List</h2>
+        <form id="add-behavior-form">
+            <label for="behavior-name">Behavior Name:</label>
+            <input type="text" id="behavior-name" name="behavior-name" required>
+            <label for="attribute-name">Attribute:</label>
+            <input type="text" id="attribute-name" name="attribute-name" required>
+            <button type="submit">Add Behavior</button>
+        </form>
+        <button id="finish-setup">Finish Setup</button>
+    </section>
+
+    <section id="student-list-section" class="hidden">
+        <div id="student-list"></div>
+    </section>
+
+    <section id="student-profile-section" cless="hidden">
+        <div id="student-tracker"></div>
+    </section>
+
+    <section id="student-summary-section" class="hidden">
+        <div id="student-summary"></div>
+    </section>
+        
+    <section>
+        <div id="daily-summary"></div>
+    </section>
+
+    <script src="StudentList.js" defer></script>
+    <script src="BehaviorTracker.js" defer></script>
+    <script src="main.js" defer></script>
+</body>
+</html>
