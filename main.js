@@ -1,26 +1,44 @@
-// student list page - home screen of class room
+// student list page - home screen of class room and on add student form
 function displayStudentNames() {
-    const studentListDiv = document.getElementById('student-list');
-    studentListDiv.innerHTML = '<h2>Student List</h2>';
-    const ul = document.createElement('ul');
+    const studentListDivs = document.getElementsByClassName('student-list');
+    for (let div of studentListDivs) {
+        div.innerHTML = '<h2>Class Roster</h2>';
+        const ul = document.createElement('ul');
 
-    listOfStudents.forEach(student => {
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.href = '#';
-        a.textContent = `${student.studentFirstName} ${student.studentLastName}`;
+        listOfStudents.forEach(student => {
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = '#';
+            a.textContent = `${student.studentFirstName} ${student.studentLastName}`;
 
-        // Add click event to display student summary
-        a.addEventListener('click', (e) => {
-            e.preventDefault();
-            displayStudentTracker(student.studentFirstName, student.studentLastName);
+            // Add click event to display student summary
+            a.addEventListener('click', (e) => {
+                e.preventDefault();
+                displayStudentTracker(student.studentFirstName, student.studentLastName);
+            });
+
+            li.appendChild(a);
+            ul.appendChild(li);
         });
 
-        li.appendChild(a);
-        ul.appendChild(li);
-    });
+        div.appendChild(ul);
+    }
+}
 
-    studentListDiv.appendChild(ul);
+// view list of behaviors - on add behavior form
+function displayBehaviorList() {
+    const behaviorListDiv = document.getElementById('behavior-list');
+        behaviorListDiv.innerHTML = '<h2>Behavior List</h2>';
+        const ul = document.createElement('ul');
+
+        listOfBehaviors.forEach(behavior => {
+            const li = document.createElement('li');
+            li.textContent = `${behavior.behaviorName}`;
+
+            ul.appendChild(li);
+        });
+
+        behaviorListDiv.appendChild(ul);
 }
 
 // back to list button - from profile page
@@ -39,26 +57,29 @@ function displayStudentTracker(firstName, lastName) {
         let tracker = `<h2>${student.studentFirstName} ${student.studentLastName}</h2>`;
         tracker += `<h3>Behaviors</h3>`;
         tracker += `<ul id="${firstName}-${lastName}-behaviors">`;
+        tracker += `<li id="table-headers"><span class="behavior-name"><b>Name</b></span><span class="behavior-count"><b>Count</b></span></li>`
 
         listOfBehaviors.forEach(behavior => {
             const studentBehaviorCount = student.studentBehaviors.find(sb => sb.behaviorName === behavior.behaviorName);
             const behaviorCount = studentBehaviorCount ? studentBehaviorCount.behaviorCount : 0;
 
-            tracker += `<li id="${firstName}-${lastName}-${behavior.behaviorName}"> 
-            ${behavior.behaviorName} <span id="${firstName}-${lastName}-${behavior.behaviorName}-count">${behaviorCount}</span> 
-            <button onclick="changeBehaviorCount('${firstName}', '${lastName}', '${behavior.behaviorName}', 1)">+</button>
-            <button onclick="changeBehaviorCount('${firstName}', '${lastName}', '${behavior.behaviorName}', -1)">-</button>
+            tracker += `<li id="${firstName}-${lastName}-${behavior.behaviorName}" class="behavior-list-item"> 
+            <span class="behavior-name">${behavior.behaviorName}</span>
+            <span id="${firstName}-${lastName}-${behavior.behaviorName}-count" class="behavior-count">${behaviorCount}</span> 
+            <span class="behavior-buttons">
+                <button onclick="changeBehaviorCount('${firstName}', '${lastName}', '${behavior.behaviorName}', 1)">+</button>
+                <button onclick="changeBehaviorCount('${firstName}', '${lastName}', '${behavior.behaviorName}', -1)">-</button>
+            </span>
             </li>`
         });
 
         tracker += `<p id="student-notes-${firstName}-${lastName}">Notes: ${student.notes}</p>`;
         tracker += `<input type="text" id="note-input-${firstName}-${lastName}" placeholder="Enter notes">`;
-        tracker += `<button onclick="addNoteToStudent('${firstName}', '${lastName}', document.getElementById('note-input-${firstName}-${lastName}'))">Add note</button>`;
+        tracker += `<button onclick="addNoteToStudent('${firstName}', '${lastName}', document.getElementById('note-input-${firstName}-${lastName}'))">Add note</button><br><br>`;
  
-
-
         tracker += `<button onclick="displayStudentSummary('${firstName}', '${lastName}')">Student Summary</button>`;
         tracker += `<button onclick="goBackToList()">Back to Student List</button>`;
+
         tracker += `</ul>`;
         studentTrackerDiv.innerHTML = tracker;
     }
@@ -136,10 +157,12 @@ document.getElementById('add-student-form').addEventListener('submit', function(
     e.preventDefault();
     const firstName = document.getElementById('first-name').value;
     const lastName = document.getElementById('last-name').value;
-    const studentStatus = document.getElementById('student-status').value || 'none';
-    addStudent(firstName, lastName, studentStatus, [], "");
+    // const studentStatus = document.getElementById('student-status').value || 'none';
+    addStudent(firstName, lastName, "", [], "");
     alert(`${firstName} ${lastName} added to the roster.`);
     document.getElementById('add-student-form').reset(); // reset form fields
+
+    displayStudentNames();
 });
 
 // next section button - from class roster to behavior list
@@ -156,6 +179,8 @@ document.getElementById('add-behavior-form').addEventListener('submit', function
     addBehavior(behaviorName, behaviorAttribute);
     alert(`Behavior "${behaviorName}" added.`);
     document.getElementById('add-behavior-form').reset(); // Reset the form fields
+
+    displayBehaviorList();
 });
 
 // finish setup button - after behavior list creation

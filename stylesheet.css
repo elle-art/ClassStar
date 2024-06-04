@@ -1,0 +1,88 @@
+body { 
+    background-color: rgb(146, 189, 215);
+    font-family: "hanken-grotesk", sans-serif;
+    text-align: center;
+}
+
+.student-list ul li {
+    list-style-type: none;
+    margin-bottom: 5px;
+    padding: 2px;
+    width: 90%;
+    text-align: center;
+}
+
+.student-list ul li a {
+    text-decoration:  none;
+    color: #131313;
+    padding-left: 35%;
+    padding-right: 35%;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    background-color: #6f85d2;
+    width: auto;
+}
+
+#student-list-section .student-list ul li a {
+    transition:
+        background-color 1s,
+        color 1s;
+}
+
+#student-roster-setup .student-list ul li a {
+    pointer-events: none;
+}
+
+a:hover {
+    background-color: #47568d !important;
+    color: black !important;
+}
+
+#behavior-list ul li{
+    text-align: center;
+    list-style-type: decimal;
+    padding: 5px;
+}
+
+#student-profile-section {
+    text-align: left;
+}
+
+#student-profile-section ul li{
+    text-align: left;
+    list-style-type: none;
+}
+
+.behavior-list-item {
+    margin-bottom: 10px;
+}
+
+.behavior-name {
+    display: inline-block;
+    width: 50%;
+    margin-right: 10px;
+}
+
+.behavior-count {
+    display: inline-block;
+    width: 10%;
+    margin-right: 10px;
+}
+
+.behavior-buttons {
+    display: inline-block;
+}
+
+#student-summary-section {
+    text-align: left;
+}
+
+#student-summary-section ul li{
+    text-align: left;
+    list-style-type: none;
+}
+
+#table-headers {
+    border-bottom: #131313 px solid;
+    margin-right: 5%;
+}
