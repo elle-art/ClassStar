@@ -285,6 +285,8 @@ document.getElementById('behavior-group-form').addEventListener('submit', functi
     alert(`"${groupName}" has been created.`);
 
     const groupSelector = document.getElementById('group-selector');
+    groupSelector.innerHTML = '';
+    
     Object.keys(groups).forEach((groupName, index) => {
         const option = document.createElement('option');
         option.value = groupName;
