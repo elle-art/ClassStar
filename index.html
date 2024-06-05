@@ -50,11 +50,60 @@
             <button type="submit">Add Behavior</button>
         </form>
         <button id="finish-setup">Finish Setup</button>
-        <div id="behavior-list"></div>
+        <div class="behavior-list"></div>
     </section>
 
     <section id="student-list-section" class="hidden">
+        <div class="main-page-buttons">
+            <button class="to-roster">Student List</button>
+            <button class="to-bList">Behavior List</button>
+        </div>
+        <h2>Class Roster</h2>
+        <!-- <a href="#" onclick="toListEdit()">Edit List</a>
+        <a href="#" onclick="toClassSummary()">View Summary</a> -->
+
         <div class="student-list"></div>
+    </section>
+
+    <section id="behavior-list-section" class="hidden">
+        <div class="main-page-buttons">
+            <button class="to-roster">Student List</button>
+            <button class="to-bList">Behavior List</button>
+        </div>
+        <h2>Behavior List</h2>
+        <!-- <a href="#" onclick="toListEdit()">Edit List</a> -->
+        <a href="#" onclick="toGroupEdits()">Edit Groups</a>
+
+        <div class="behavior-list"></div>
+    </section>
+
+    <section id="behavior-group-section" class="hidden">
+        <form id="behavior-group-form">
+            <label for="group-name">Group Name:</label>
+            <input type="text" id="group-name" name="group-name" required> <br>
+            <div class="form-row">
+                <label for="b1">Select Behavior 1:</label>
+                <select id="b1"></select>
+                <input type="color" id="color-1" value="#ff0000">
+            </div>
+            <div class="form-row">
+                <label for="b2">Select Behavior 2:</label>
+                <select id="b2"></select>
+                <input type="color" id="color-2" value="#00ff00">
+            </div>
+            <div class="form-row">
+                <label for="b3">Select Behavior 3:</label>
+                <select id="b3"></select>
+                <input type="color" id="color-3" value="#0000ff">
+            </div>
+            <div class="form-row">
+                <label for="b4">Select Behavior 4:</label>
+                <select id="b4"></select>
+                <input type="color" id="color-4" value="#ffff00">
+            </div>
+            <button type="submit">Add group</button>
+        </form>
+        <button class="to-bList">Done</button>
     </section>
 
     <section id="student-profile-section" cless="hidden">
@@ -64,10 +113,15 @@
     <section id="student-summary-section" class="hidden">
         <div id="student-summary"></div>
     </section>
-        
-    <section>
-        <div id="daily-summary"></div>
+
+    <section id="button-view-section" class="hidden">
+        <select id="group-selector" onchange="updateButtonView()"></select>
+        <div id="button-view"></div>
     </section>
+        
+    <!-- <section>
+        <div id="daily-summary"></div>
+    </section> -->
 
     <script src="StudentList.js" defer></script>
     <script src="BehaviorTracker.js" defer></script>

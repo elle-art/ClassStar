@@ -8,7 +8,7 @@ body {
     list-style-type: none;
     margin-bottom: 5px;
     padding: 2px;
-    width: 90%;
+    width: 100%;
     text-align: center;
 }
 
@@ -38,7 +38,7 @@ a:hover {
     color: black !important;
 }
 
-#behavior-list ul li{
+.behavior-list ul li{
     text-align: center;
     list-style-type: decimal;
     padding: 5px;

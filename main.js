@@ -2,7 +2,7 @@
 function displayStudentNames() {
     const studentListDivs = document.getElementsByClassName('student-list');
     for (let div of studentListDivs) {
-        div.innerHTML = '<h2>Class Roster</h2>';
+        div.innerHTML = '';
         const ul = document.createElement('ul');
 
         listOfStudents.forEach(student => {
@@ -25,10 +25,11 @@ function displayStudentNames() {
     }
 }
 
-// view list of behaviors - on add behavior form
+// list of behaviors page - page within classroom and on add behavior form
 function displayBehaviorList() {
-    const behaviorListDiv = document.getElementById('behavior-list');
-        behaviorListDiv.innerHTML = '<h2>Behavior List</h2>';
+    const behaviorListDivs = document.getElementsByClassName('behavior-list');
+    for (let div of behaviorListDivs) {
+        div.innerHTML = '';
         const ul = document.createElement('ul');
 
         listOfBehaviors.forEach(behavior => {
@@ -38,26 +39,72 @@ function displayBehaviorList() {
             ul.appendChild(li);
         });
 
-        behaviorListDiv.appendChild(ul);
+        div.appendChild(ul);
+    }
 }
 
-// back to list button - from profile page
-function goBackToList() {
+// go to button group page from the behavior list page
+function toGroupEdits() {
+    document.getElementById('behavior-list-section').classList.add('hidden');
+    document.getElementById('behavior-group-section').classList.remove('hidden');
+}
+
+// fills the dropdown menu of the group edit form
+function fillDropdown(menuOption) {
+    listOfBehaviors.forEach(behavior => {
+        const option = document.createElement('option');
+        option.value = behavior.behaviorName;
+        option.textContent = behavior.behaviorName;
+        menuOption.appendChild(option);
+    });
+}
+
+function displayButtonView(groupName) {
+    if (Object.keys(groups).length === 0) { // Checking if the groups object is empty
+        alert('No button groups available. Please navigate to the behavior list page to create a group.');
+        return;
+    }
+
     document.getElementById('student-profile-section').classList.add('hidden');
-    document.getElementById('student-list-section').classList.remove('hidden');
-    displayStudentNames();
+    document.getElementById('button-view-section').classList.remove('hidden');
+
+    const buttonsPage = document.getElementById('button-view');
+    buttonsPage.innerHTML = ''; // Clear existing buttons
+
+    if (groups[groupName]) {
+        let buttons = `<h4>${currFirstName.charAt(0)}${currLastName.charAt(0)}</h4>`;
+
+        const behaviors = groups[groupName];
+        behaviors.forEach(item => {
+            buttons += `<button style="background-color: ${item.color};" onclick="changeBehaviorCount('${currFirstName}', '${currLastName}', '${item.behavior}', 1)">${item.behavior.charAt(0)}</button><br>`;
+        });
+        buttons += `<button onclick="goBackToProfile()">Back to Student List</button>`;
+        buttons += '</div>';
+        buttonsPage.innerHTML = buttons;
+    }
+}
+
+function updateButtonView() {
+    const selectedGroup = document.getElementById('group-selector').value;
+    displayButtonView(selectedGroup);
 }
 
 // student profile page - to track a student's behavior
+let currFirstName = '';
+let currLastName = '';
+
 function displayStudentTracker(firstName, lastName) {
     const studentTrackerDiv = document.getElementById('student-tracker');
     const student = listOfStudents.find(student => student.studentFirstName === firstName && student.studentLastName === lastName);
+    currFirstName = firstName;
+    currLastName = lastName;
 
     if (student) {
-        let tracker = `<h2>${student.studentFirstName} ${student.studentLastName}</h2>`;
+        let tracker = `<h2>${firstName} ${lastName}</h2>`;
+        tracker += `<button onclick="displayButtonView('${Object.keys(groups)[0]}')">Button View</button>`;
         tracker += `<h3>Behaviors</h3>`;
         tracker += `<ul id="${firstName}-${lastName}-behaviors">`;
-        tracker += `<li id="table-headers"><span class="behavior-name"><b>Name</b></span><span class="behavior-count"><b>Count</b></span></li>`
+        tracker += `<li id="table-headers"><span class="behavior-name"><b>Name</b></span><span class="behavior-count"><b>Count</b></span></li>`;
 
         listOfBehaviors.forEach(behavior => {
             const studentBehaviorCount = student.studentBehaviors.find(sb => sb.behaviorName === behavior.behaviorName);
@@ -78,7 +125,7 @@ function displayStudentTracker(firstName, lastName) {
         tracker += `<button onclick="addNoteToStudent('${firstName}', '${lastName}', document.getElementById('note-input-${firstName}-${lastName}'))">Add note</button><br><br>`;
  
         tracker += `<button onclick="displayStudentSummary('${firstName}', '${lastName}')">Student Summary</button>`;
-        tracker += `<button onclick="goBackToList()">Back to Student List</button>`;
+        tracker += `<button class="to-roster">Back to Student List</button>`;
 
         tracker += `</ul>`;
         studentTrackerDiv.innerHTML = tracker;
@@ -90,15 +137,15 @@ function displayStudentTracker(firstName, lastName) {
 
 // back to profile button - from student summary page
 function goBackToProfile() {
-    document.getElementById('student-summary-section').classList.add('hidden');
     document.getElementById('student-profile-section').classList.remove('hidden');
-    displayStudentNames();
+    document.getElementById('student-summary-section').classList.add('hidden');
+    document.getElementById('button-view-section').classList.add('hidden');
 }
 
 // display a student's summary
-function displayStudentSummary(firstName, lastName) {
+function displayStudentSummary() {
     const studentSummaryDiv = document.getElementById('student-summary');
-    const student = listOfStudents.find(student => student.studentFirstName === firstName && student.studentLastName === lastName);
+    const student = listOfStudents.find(student => student.studentFirstName === currFirstName && student.studentLastName === currLastName);
 
     if (student) {
         let summary = `<h2>${student.studentFirstName} ${student.studentLastName}</h2>`;
@@ -120,27 +167,27 @@ function displayStudentSummary(firstName, lastName) {
 }
 
 // print daily summary of all students
-function printDailySummary() {
-    const dailySummaryDiv = document.getElementById('daily-summary');
-    const groups = createStudentGroups();
+// function printDailySummary() {
+//     const dailySummaryDiv = document.getElementById('daily-summary');
+//     const groups = createStudentGroups();
 
-    let summary = '<h2>Daily Summary</h2>';
-    summary += `<p>Squares: ${groups.squares.length}</p>`;
-    summary += `<p>Triangles: ${groups.triangles.length}</p>`;
-    summary += `<p>Circles: ${groups.circles.length}</p>`;
-    summary += `<p>None: ${groups.none.length}</p>`;
+//     let summary = '<h2>Daily Summary</h2>';
+//     summary += `<p>Squares: ${groups.squares.length}</p>`;
+//     summary += `<p>Triangles: ${groups.triangles.length}</p>`;
+//     summary += `<p>Circles: ${groups.circles.length}</p>`;
+//     summary += `<p>None: ${groups.none.length}</p>`;
     
-    summary += '<h3>All Students</h3>';
-    summary += '<ul>';
-    listOfStudents.forEach(student => {
-        summary += `<li>${student.studentFirstName} ${student.studentLastName}: `;
-        summary += student.studentBehaviors.map(behavior => `${behavior.behaviorName} (${behavior.behaviorCount})`).join(', ');
-        summary += `</li>`;
-    });
-    summary += '</ul>';
+//     summary += '<h3>All Students</h3>';
+//     summary += '<ul>';
+//     listOfStudents.forEach(student => {
+//         summary += `<li>${student.studentFirstName} ${student.studentLastName}: `;
+//         summary += student.studentBehaviors.map(behavior => `${behavior.behaviorName} (${behavior.behaviorCount})`).join(', ');
+//         summary += `</li>`;
+//     });
+//     summary += '</ul>';
 
-    dailySummaryDiv.innerHTML = summary;
-}
+//     dailySummaryDiv.innerHTML = summary;
+// }
 
 var teacherName = "";
 // submission button - teacher name form
@@ -177,20 +224,73 @@ document.getElementById('add-behavior-form').addEventListener('submit', function
     const behaviorName = document.getElementById('behavior-name').value;
     const behaviorAttribute = document.getElementById('attribute-name').value;
     addBehavior(behaviorName, behaviorAttribute);
+    displayBehaviorList();
     alert(`Behavior "${behaviorName}" added.`);
     document.getElementById('add-behavior-form').reset(); // Reset the form fields
-
-    displayBehaviorList();
 });
 
 // finish setup button - after behavior list creation
 document.getElementById('finish-setup').addEventListener('click', function() {
+    // calls function to fill dropdown menus of the group edits form
+    fillDropdown(document.getElementById('b1'));
+    fillDropdown(document.getElementById('b2'));
+    fillDropdown(document.getElementById('b3'));
+    fillDropdown(document.getElementById('b4'));
+
     document.getElementById('page-title').textContent = `${teacherName}'s Classroom Behavior Tracker`;
     document.getElementById('add-behavior-section').classList.add('hidden');
     document.getElementById('student-list-section').classList.remove('hidden');
     displayStudentNames();
 });
 
+// button to muve to roster page
+const toRoster = document.getElementsByClassName('to-roster');
+for (let button of toRoster) {
+    button.addEventListener('click', function() {
+        document.getElementById('student-list-section').classList.remove('hidden');
+        displayStudentNames();
+        document.getElementById('behavior-list-section').classList.add('hidden');
+        document.getElementById('student-profile-section').classList.add('hidden');
+
+    });
+}
+
+const toBList = document.getElementsByClassName('to-bList');
+for (let button of toBList) {
+    button.addEventListener('click', function() {
+        document.getElementById('behavior-list-section').classList.remove('hidden');
+        displayBehaviorList();
+        document.getElementById('student-list-section').classList.add('hidden');
+        document.getElementById('behavior-group-section').classList.add('hidden');
+    });
+}
+
+// adds information from group edit form to arrays
+const groups = {};
+
+document.getElementById('behavior-group-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const groupName = document.getElementById('group-name').value;
+    const buttonGroup = [];
+        
+    for (let i = 1; i <= 4; i++) {
+        const behavior = document.getElementById(`b${i}`).value;
+        const color = document.getElementById(`color-${i}`).value;
+        buttonGroup.push({ behavior, color });
+    }
+
+    groups[groupName] = buttonGroup;
+    alert(`"${groupName}" has been created.`);
+
+    const groupSelector = document.getElementById('group-selector');
+    Object.keys(groups).forEach((groupName, index) => {
+        const option = document.createElement('option');
+        option.value = groupName;
+        option.textContent = groupName;
+        groupSelector.appendChild(option);
+    });
+});
 
 document.addEventListener('DOMContentLoaded', () => {
     displayStudentNames();
