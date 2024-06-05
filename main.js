@@ -125,8 +125,6 @@ function displayStudentTracker(firstName, lastName) {
         tracker += `<button onclick="addNoteToStudent('${firstName}', '${lastName}', document.getElementById('note-input-${firstName}-${lastName}'))">Add note</button><br><br>`;
  
         tracker += `<button onclick="displayStudentSummary('${firstName}', '${lastName}')">Student Summary</button>`;
-        tracker += `<button class="to-roster">Back to Student List</button>`;
-
         tracker += `</ul>`;
         studentTrackerDiv.innerHTML = tracker;
     }
