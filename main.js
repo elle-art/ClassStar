@@ -73,13 +73,15 @@ function displayButtonView(groupName) {
 
     if (groups[groupName]) {
         let buttons = `<h4>${currFirstName.charAt(0)}${currLastName.charAt(0)}</h4>`;
+        buttons += `<div class="button-grid">`;
 
         const behaviors = groups[groupName];
         behaviors.forEach(item => {
-            buttons += `<button style="background-color: ${item.color};" onclick="changeBehaviorCount('${currFirstName}', '${currLastName}', '${item.behavior}', 1)">${item.behavior.charAt(0)}</button><br>`;
+            buttons += `<button class="behavior-group-buttons" style="background-color: ${item.color};" onclick="changeBehaviorCount('${currFirstName}', '${currLastName}', '${item.behavior}', 1)">${item.behavior.charAt(0)}</button>`;
         });
-        buttons += `<button onclick="goBackToProfile()">Back to Student List</button>`;
         buttons += '</div>';
+        buttons += `<button onclick="goBackToProfile()">Back to Student List</button>`;
+
         buttonsPage.innerHTML = buttons;
     }
 }
@@ -136,6 +138,7 @@ function displayStudentTracker(firstName, lastName) {
 // back to profile button - from student summary page
 function goBackToProfile() {
     document.getElementById('student-profile-section').classList.remove('hidden');
+    document.getElementById('page-title').classList.remove('hidden');
     document.getElementById('student-summary-section').classList.add('hidden');
     document.getElementById('button-view-section').classList.add('hidden');
 }

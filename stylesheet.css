@@ -9,20 +9,25 @@ body {
     margin-bottom: 5px;
     padding: 2px;
     width: 100%;
-    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .student-list ul li a {
     text-decoration:  none;
     color: #131313;
-    padding-left: 35%;
+    padding-left: 25%;
     padding-right: 35%;
     padding-top: 3px;
     padding-bottom: 3px;
     background-color: #6f85d2;
     width: auto;
 }
-
+#student-list-section {
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
 #student-list-section .student-list ul li a {
     transition:
         background-color 1s,
@@ -85,4 +90,29 @@ a:hover {
 #table-headers {
     border-bottom: #131313 px solid;
     margin-right: 5%;
+}
+
+#button-view {
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.behavior-group-buttons {
+    font-size: 16px;
+    width: 150px;
+    height: 150px;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-left: 130px;
+    padding-top: 120px;
+  }
+
+.button-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-row-gap: 10px;
+    margin-left: 9%;
+    margin-right: 9%;
+    margin-bottom: 20px;
 }
