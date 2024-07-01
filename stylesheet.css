@@ -37,18 +37,20 @@ label {
 /* my classes/ids */
 #file-input-form {
     margin-left: 5%;
+    margin-bottom: -100px
 }
 
 #to-teacher-setup {
-    position: relative;    
+    position: relative;
+    margin-bottom: 30px;
 }
 
 #new-user-wrapper {
-    position: absolute;
-    top: 155px;
-    left: 380px;
-    padding-bottom: 30px;
-    padding-left: 30px;
+    position: relative;
+    width: 100px;
+    top: 10px;
+    left: 180px;
+    padding-left: 15px;
     border-left: #131313 1px solid;
 }
 
