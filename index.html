@@ -1,131 +1,244 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Student Behavior Tracker</title>
+    <link rel="stylesheet" href="https://unpkg.com/98.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
     <link href="stylesheet.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://use.typekit.net/ape6oqs.css">
+    <link rel="stylesheet" href="https://use.typekit.net/ape6oqs.css" />
     <style>
-        .hidden {
-            display: none;
-        }
+      .hidden {
+        display: none;
+      }
     </style>
-</head>
-<body>
-    <h1 id="page-title">Student Behavior Tracker</h1>
+  </head>
+  <body>
+    <div class="window" style="margin: 0.25rem; width: 325px">
+      <div class="title-bar">
+        <div class="title-bar-text" id="page-title">ClassStar</div>
 
-    <section id="teacher-name-setup">
-        <h2>Welcome!</h2>
-        <form id="teacher-name-form">
+        <div class="title-bar-controls">
+          <button class="minimize-button" aria-label="Minimize"></button>
+          <button class="maximize-button" aria-label="Maximize"></button>
+          <button aria-label="Close"></button>
+        </div>
+      </div>
+
+      <div class="window-body">
+        <section id="first-page-section">
+          <h2>Welcome!</h2>
+          <form id="file-input-form">
+            <p>Returning User</p>
+            <input type="file" id="imported-file" accept=".xlsx">
+            <button type="submit">Upload Save</button>
+          </form>
+          <div id="new-user-wrapper">
+            <p>New User</p>
+            <button id="to-teacher-setup">New Setup</button>
+          </div>
+        </section>
+
+        <section id="teacher-name-setup" class="hidden">
+          <h2>Welcome!</h2>
+          <form id="teacher-name-form">
             <label for="teacher-name">What do your students call you?</label>
-            <input type="text" id="teacher-name" name="teacher-name" required>
+            <input type="text" id="teacher-name" name="teacher-name" required />
             <button type="submit">Enter</button>
-        </form>
-    </section>
+          </form>
+        </section>
 
-    <section id="student-roster-setup" class="hidden">
-        <h2>Create Student Roster</h2>
-        <form id="add-student-form">
-            <label for="first-name">First Name:</label>
-            <input type="text" id="first-name" name="first-name" required> <br>
-            <label for="last-name">Last Name:</label>
-            <input type="text" id="last-name" name="last-name" required>
-            <!-- <label for="student-status">Status:</label>
-            <input type="text" id="student-status" name="student-status"> -->
-            <button type="submit">Add Student</button>
-        </form>
-        <button id="next-to-behaviors">Next Section</button>
+        <section id="student-roster-setup" class="hidden">
+          <div class="window" style="margin: 5px; width: 295px">
+            <div class="title-bar">
+              <div class="title-bar-text">Add New Student</div>
 
-        <div class="student-list" id="make-roster"></div>
-    </section>
+              <div class="title-bar-controls">
+                <button aria-label="Help"></button>
+                <button class="minimize-button" aria-label="Minimize"></button>
+                <button class="maximize-button" aria-label="Maximize"></button>
+              </div>
+            </div>
+            <div class="window-body">
+              <h4>Add to Class Roster</h4>
+              <form id="add-student-form">
+                <div class="field-row">
+                  <label for="first-name">First Name </label>
+                  <input
+                    type="text"
+                    id="first-name"
+                    name="first-name"
+                    required
+                  />
+                </div>
+                <div class="field-row">
+                  <label for="last-name">Last Name </label>
+                  <input type="text" id="last-name" name="last-name" required />
+                </div>
+                <button type="submit">Add Student</button> <br />
+                <button id="next-to-behaviors" class="advance-button">
+                  Next Section
+                </button>
+                <button
+                  class="to-roster hidden advance-button"
+                  id="roster-edit"
+                >
+                  Done Editing
+                </button>
+              </form>
+            </div>
+          </div>
+          <h3>Class Roster</h3>
+          <div id="student-list-edit"></div>
+        </section>
 
-    <section id="add-behavior-section" class="hidden">
-        <h2>Create Behavior List</h2>
-        <form id="add-behavior-form">
-            <label for="behavior-name">Behavior Name:</label>
-            <input type="text" id="behavior-name" name="behavior-name" required> <br>
-            <label for="attribute-name">Attribute:</label>
-            <input type="text" id="attribute-name" name="attribute-name" required>
-            <button type="submit">Add Behavior</button>
-        </form>
-        <button id="finish-setup">Finish Setup</button>
-        <div class="behavior-list"></div>
-    </section>
+        <section id="behavior-list-setup" class="hidden">
+          <div class="window" style="margin: 5px; width: 295px">
+            <div class="title-bar">
+              <div class="title-bar-text">Add New Behavior</div>
 
-    <section id="student-list-section" class="hidden">
-        <div class="main-page-buttons">
-            <button class="to-roster">Student List</button>
-            <button class="to-bList">Behavior List</button>
-        </div>
-        <h2>Class Roster</h2>
-        <!-- <a href="#" onclick="toListEdit()">Edit List</a>
-        <a href="#" onclick="toClassSummary()">View Summary</a> -->
+              <div class="title-bar-controls">
+                <button aria-label="Help"></button>
+                <button class="minimize-button" aria-label="Minimize"></button>
+                <button class="maximize-button" aria-label="Maximize"></button>
+              </div>
+            </div>
 
-        <div class="student-list"></div>
-    </section>
+            <div class="window-body">
+              <h4>Add to Behavior List</h4>
+              <form id="add-behavior-form">
+                <label for="behavior-name">Behavior Name </label>
+                <input
+                  type="text"
+                  id="behavior-name"
+                  name="behavior-name"
+                  required
+                />
+                <br />
+                <label for="attribute-name">Behavior Type (optional) </label>
+                <select id="attribute-name" name="attribute-name">
+                  <option value="n/a">N/A</option>
+                  <option value="positive">Positive</option>
+                  <option value="negative">Negative</option>
+                </select>
+                <button type="submit">Add Behavior</button> <br /><br />
+              </form>
+              <button id="finish-setup" class="advance-button" onclick="finshSetup()">
+                Finish Setup
+              </button>
+              <button id="done-editing" class="to-bList hidden advance-button">
+                Done Editing
+              </button>
+            </div>
+          </div>
+          
+          <h3>Behavior List</h3>
+          <div id="behavior-list-edit"></div>
+        </section>
 
-    <section id="behavior-list-section" class="hidden">
-        <div class="main-page-buttons">
-            <button class="to-roster">Student List</button>
-            <button class="to-bList">Behavior List</button>
-        </div>
-        <h2>Behavior List</h2>
-        <!-- <a href="#" onclick="toListEdit()">Edit List</a> -->
-        <a href="#" onclick="toGroupEdits()">Edit Groups</a>
+        <section id="homepage-section" class="hidden">
+          <menu role="tablist">
+            <li role="tab" aria-selected="true"><a href="#r-tab">Students</a></li>
+            <li role="tab" class="b-tab-id"><a href="#b-tab">Behaviors</a></li>
+            <li role="tab"><a href="#s-tab">Settings</a></li>
+          </menu>
+          <div class="window" role="tabpanel">
+            <div class="window-body tab-content active" id="r-tab">
+              <h4>
+                Class Roster
+                <a href="#" onclick="toRosterEdit()"
+                  ><i class="bi bi-pencil-fill"></i
+                ></a>
+              </h4>
+              <!-- <a href="#" onclick="toClassSummary()">View Summary</a> -->
+              <div class="student-list"></div>
+            </div>
 
-        <div class="behavior-list"></div>
-    </section>
+            <div class="window-body tab-content" id="b-tab">
+              <h4>
+                Behavior List
+                <a href="#" onclick="toBListEdit()"
+                  ><i class="bi bi-pencil-fill"></i
+                ></a>
+              </h4>
+              <button onclick="toGroupEdits()">Create Groups</button>
 
-    <section id="behavior-group-section" class="hidden">
-        <form id="behavior-group-form">
+              <div class="behavior-list"></div>
+            </div>
+
+            <div class="window-body tab-content" id="s-tab">
+              <button id="export-button">Export to Excel</button>
+            </div>
+          </div>
+        </section>
+
+        <section id="behavior-group-section" class="hidden">
+          <h5>Create Button Group</h5>
+          <form id="behavior-group-form">
             <label for="group-name">Group Name:</label>
-            <input type="text" id="group-name" name="group-name" required> <br>
+            <input type="text" id="group-name" name="group-name" required />
+            <br /><br />
             <div class="form-row">
-                <label for="b1">Select Behavior 1:</label>
-                <select id="b1"></select>
-                <input type="color" id="color-1" value="#ff0000">
+              <label for="b1">Select Behavior 1:</label>
+              <select id="b1"></select>
+              <input type="color" id="color-1" value="#ff0000" />
             </div>
             <div class="form-row">
-                <label for="b2">Select Behavior 2:</label>
-                <select id="b2"></select>
-                <input type="color" id="color-2" value="#00ff00">
+              <label for="b2">Select Behavior 2:</label>
+              <select id="b2"></select>
+              <input type="color" id="color-2" value="#00ff00" />
             </div>
             <div class="form-row">
-                <label for="b3">Select Behavior 3:</label>
-                <select id="b3"></select>
-                <input type="color" id="color-3" value="#0000ff">
+              <label for="b3">Select Behavior 3:</label>
+              <select id="b3"></select>
+              <input type="color" id="color-3" value="#0000ff" />
             </div>
             <div class="form-row">
-                <label for="b4">Select Behavior 4:</label>
-                <select id="b4"></select>
-                <input type="color" id="color-4" value="#ffff00">
+              <label for="b4">Select Behavior 4:</label>
+              <select id="b4"></select>
+              <input type="color" id="color-4" value="#ffff00" />
+            </div>
+            <div class="form-row">
+              <label for="b5">Select Behavior 5:</label>
+              <select id="b5"></select>
+              <input type="color" id="color-5" value="#8000ff" />
+            </div>
+            <div class="form-row">
+              <label for="b6">Select Behavior 6:</label>
+              <select id="b6"></select>
+              <input type="color" id="color-6" value="#ff7300" />
             </div>
             <button type="submit">Add group</button>
-        </form>
-        <button class="to-bList">Done</button>
-    </section>
+          </form>
+          <button class="to-bList">Done</button>
+        </section>
 
-    <section id="student-profile-section" class="hidden">
-        <div id="student-tracker"></div>
-        <button class="to-roster">Back to Student List</button>
-    </section>
+        <section id="student-profile-section" class="hidden">
+          <div id="student-tracker"></div>
+          <button class="to-roster">Back to Student List</button>
+        </section>
 
-    <section id="student-summary-section" class="hidden">
-        <div id="student-summary"></div>
-    </section>
+        <section id="student-summary-section" class="hidden">
+          <div id="student-summary"></div>
+        </section>
 
-    <section id="button-view-section" class="hidden">
-        <select id="group-selector" onchange="updateButtonView()"></select>
-        <div id="button-view"></div>
-    </section>
-        
-    <!-- <section>
-        <div id="daily-summary"></div>
-    </section> -->
+        <section id="button-view-section" class="hidden">
+          <select id="group-selector" onchange="updateButtonView()"></select>
+          <div id="button-view"></div>
+        </section>
+      </div>
+    </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
     <script src="StudentList.js" defer></script>
     <script src="BehaviorTracker.js" defer></script>
+    <script src="Navigation.js" defer></script>
     <script src="main.js" defer></script>
-</body>
+    <script src="SavetoExcel.js"></script>
+
+  </body>
 </html>

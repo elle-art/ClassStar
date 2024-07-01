@@ -1,56 +1,249 @@
+/* html tag styles */
 body { 
     background-color: rgb(146, 189, 215);
     font-family: "hanken-grotesk", sans-serif;
     text-align: center;
 }
 
-.student-list ul li {
-    list-style-type: none;
+section {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 10px;
+}
+
+form {
+    text-align: left;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+form input {
     margin-bottom: 5px;
-    padding: 2px;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
 }
 
-.student-list ul li a {
-    text-decoration:  none;
-    color: #131313;
-    padding-left: 25%;
-    padding-right: 35%;
-    padding-top: 3px;
+label {
+    padding-bottom: 5px;
+    font-size: 14px;
+}
+
+/* windows stylesheet adjustments */
+.window {
+    margin-left: auto !important;
+    margin-right: auto !important;
+
+}
+
+/* my classes/ids */
+#file-input-form {
+    margin-left: 5%;
+}
+
+#to-teacher-setup {
+    position: relative;    
+}
+
+#new-user-wrapper {
+    position: absolute;
+    top: 155px;
+    left: 380px;
+    padding-bottom: 30px;
+    padding-left: 30px;
+    border-left: #131313 1px solid;
+}
+
+#first-page-section p {
+    font-size: 14px;
+    font-weight: bold;
+} /* section 1 */
+
+#teacher-name-form {
+    text-align: center;  
+} /* section 2  */
+
+#add-student-form, #add-behavior-form {
+    margin-left: 3em;
+    margin-right: 2px;
     padding-bottom: 3px;
-    background-color: #6f85d2;
-    width: auto;
-}
-#student-list-section {
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-}
-#student-list-section .student-list ul li a {
-    transition:
-        background-color 1s,
-        color 1s;
+} 
+
+.edit-grid ul {
+    padding: 0;
+    margin: 0;
 }
 
-#student-roster-setup .student-list ul li a {
+.edit-grid li {
+    text-align: left;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items:center;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid #797878;
+    background-color: whitesmoke;
+    margin: 5px;
+}
+
+.advance-button {
+    margin-left: 68%;
+    margin-bottom: 5px;
+    width: 85px;
+}
+
+#student-list-edit ul li a {
     pointer-events: none;
 }
 
-a:hover {
-    background-color: #47568d !important;
+#student-list-edit ul li {
+    padding: 5px;
+    padding-left: 20px;
+    text-align: left;
+}
+
+#student-list-edit ul li a {
+    text-decoration: none;
+    color: #131313;
+}
+
+#behavior-list-edit {
+    margin-top: -25px;
+}
+
+#behavior-list-edit .edit-grid li {
+    grid-template-columns: 1fr auto 80px 80px;   
+}
+
+#behavior-list-edit .edit-grid li button {
+    padding-left: 5px;
+} 
+
+.behavior-name {
+    display: inline-block;
+    max-width: 95px;
+    margin-right: 10px;
+    grid-column: 1 / span 2;
+}
+
+.indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.pos-dot {
+    background-color: green;
+}
+
+.neg-dot {
+    background-color: red;
+} /* section 3 and 4 - list edits */
+
+#homepage-section {
+    max-width: 500px;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+i {
+    font-size: 20px;
+    padding: 5px;
+    color: #515151;
+    margin-left: -10px;
+}
+
+.student-list {
+    margin-top: -25px;;
+}
+
+.student-list ul li {
+    list-style-type: none;
+    width: 100%;
+    max-width: 600px;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #797878;
+    background-color: whitesmoke;
+    margin-bottom: 5px;
+    margin-left: -12%;
+
+    transition:
+    background-color 1s,
+    color 1s;
+}
+
+.student-list ul li a {
+    text-decoration: none;
+    color: #131313;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 20%;
+    margin-left: -20%;
+}
+
+.student-list ul li:hover {
+    background-color: #999696;
     color: black !important;
 }
 
-.behavior-list ul li{
+#b-tab h4 {
+    margin-bottom: 10px;
+} 
+
+.behavior-list ul li {
     text-align: center;
     list-style-type: decimal;
     padding: 5px;
 }
 
+.behavior-list {
+    max-width: 350px;
+    margin-left: 15%;
+    margin-right: 15%;
+} /* section 5 - classroom pages */
+
+#behavior-group-form {
+    text-align: left;
+    width: 90%;
+    margin-left: 5%;
+}
+
+#behavior-group-form .form-row input {
+    width: 30px;
+    height: 22px;
+    padding: .25px;
+}
+
+#behavior-group-form button {
+    margin-bottom: 5px;
+    margin-left: 75%;
+}
+h5 {
+    font-size: 20px;
+    text-align: left;
+    margin-left: 15px;
+    margin-bottom: 10px;
+    margin-top: 25px;
+} /* section 6 - behavior groups form */
+
+#student-tracker h5 {
+    margin-left: 0px;
+}
+
+h6 {
+    font-size: 16px;
+    margin-top: 25px;
+    margin-bottom: 0px;
+}
+
 #student-profile-section {
     text-align: left;
+    margin-left: 10px;
 }
 
 #student-profile-section ul li{
@@ -60,59 +253,99 @@ a:hover {
 
 .behavior-list-item {
     margin-bottom: 10px;
+    margin-left: -20px;
+    width: 280px;
+    display: flex;
+    align-items: center; 
 }
 
-.behavior-name {
-    display: inline-block;
-    width: 50%;
+.behavior-list-item .behavior-name {
+    flex: 1;
     margin-right: 10px;
 }
 
 .behavior-count {
     display: inline-block;
-    width: 10%;
-    margin-right: 10px;
+    flex: 0 0 8%;
+    margin-right: 20px;
+    text-align: center;
 }
 
 .behavior-buttons {
-    display: inline-block;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 50px;
+    gap: 5px;
+} 
+
+.behavior-buttons button{
+    min-width: 10px;
+    padding: 10px;
+    width: 100%;
+    aspect-ratio: 1;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    font-size: 16px;
 }
+
+#table-headers {
+    border-bottom: #131313 1px solid;
+    margin-bottom: 5px;
+    margin-right: 30%;
+    margin-left: -20px;
+    display: flex;
+} 
+
+.name-header {
+    flex: 1;
+}
+
+.count-header {
+    flex: 0 50%;
+} /* section 7 - student profile */
 
 #student-summary-section {
     text-align: left;
+    margin-left: 10px;
+}
+
+#student-summary-section h5 {
+    margin-left: 0px;
+}
+
+#student-summary-section p {
+    font-size: 14px;
 }
 
 #student-summary-section ul li{
     text-align: left;
     list-style-type: none;
-}
-
-#table-headers {
-    border-bottom: #131313 px solid;
-    margin-right: 5%;
-}
+    padding: 2px;
+    font-size: 14px;
+} /* section 8 - student summary */
 
 #button-view {
     max-width: 450px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 4%;
+    margin-right: 4%;
 }
-
-.behavior-group-buttons {
-    font-size: 16px;
-    width: 150px;
-    height: 150px;
-    margin-left: 0px;
-    margin-right: 0px;
-    padding-left: 130px;
-    padding-top: 120px;
-  }
 
 .button-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-row-gap: 10px;
-    margin-left: 9%;
-    margin-right: 9%;
+    margin-left: 6%;
+    margin-right: 6%;
     margin-bottom: 20px;
-}
+} 
+
+.behavior-group-buttons {
+    font-size: 16px;
+    width: 120px;
+    aspect-ratio: 1;
+    margin-left: 0px;
+    margin-right: 5px;
+    padding-top: 60%;
+    padding-left: 70%;
+} /* section 9 - button view */
