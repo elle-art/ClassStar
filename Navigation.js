@@ -64,7 +64,7 @@ function goBackToProfile() {
 
 // loads classroom pages after setup
 function finishSetup() {
-    // dropdown in ceate group form
+    // dropdown in create group form
     for (let i = 1; i <= 6; i++) {
         fillDropdown(document.getElementById(`b${i}`));
     }

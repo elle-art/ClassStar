@@ -47,11 +47,11 @@ document.getElementById('add-student-form').addEventListener('submit', function(
     displayRosterEditMode();
 });
 
-// next section button - from class roster to behavior list
+// next section button - from class roster edit to behavior list edit
 document.getElementById('next-to-behaviors').addEventListener('click', function(e) {
     e.preventDefault();
     document.getElementById('behavior-list-setup').classList.remove('hidden');
-    document.getElementById('first-page-section').classList.add('hidden');
+    document.getElementById('student-roster-setup').classList.add('hidden');
 });
 
 // add behaviors button - behavior list form
