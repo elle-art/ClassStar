@@ -131,7 +131,7 @@ function displayStudentSummary() {
 
     if (student) {
         let summary = `<h5>${student.studentFirstName} ${student.studentLastName}</h5>`;
-        if (student.studentBehaviors.length === 0) {
+        if (student.studentBehaviors.length > 0) {
             summary += '<h6>Behaviors</h6>';
             summary += '<ul>';
             student.studentBehaviors.forEach(behavior => {
